@@ -19,23 +19,50 @@
         <!-- Display Div -->
         <div class="results">
             <div class="loader"></div>
-            <div v-if="successCheck === true">
+            <div v-if="successCheck === true" class="video-display">
                 <div class="thumbnail">
                     <img :src="thumbnailURL" alt="">
                 </div>
                 <div class="video">
                     <div class="videotitle">{{ videoTitle }}</div>
-                    <div class="videolength"> videoLength </div>
-                    <div class="format-btn-container">
+                    <div class="videolength"> 20:35 </div>
+                    <!-- DROPDOWN! -->
+
+                    <!-- <div class="format-btn-container">
                         <button id="format-btn">Select Format</button>
                     </div>
-                    <ul class="formats">
+                    <ul class="formats-dropdown">
                         <li>
-                            <button>
-                                <a :href="videoLinkhd720" download target="_blank"> Video 720p </a>
+                            <button class="formats-btn">
+                                <a :href="videoLink_mp3_64" download target="_blank"> Audio MP3 - 64kb </a>
+                                <a :href="videoLink_mp3_128" download target="_blank"> Audio MP3 - 128kb </a>
+                                <a :href="videoLink_aac" download target="_blank"> Audio AAC</a>
+                                <a :href="videoLink_1080" download target="_blank"> Video 1080p </a>
+                                <a :href="videoLink_720" download target="_blank"> Video 720p </a>
+                                <a :href="videoLink_480" download target="_blank"> Video 480p </a>
+                                <a :href="videoLink_240" download target="_blank"> Video 240p </a>
                             </button>
                         </li>
-                    </ul>
+                    </ul> -->
+
+
+                    <div class="formats-dropdown">
+                        <button class="format-btn">
+                            Select Format
+                        </button>
+                        <div class="dropdown-content">
+                            <a :href="videoLink_mp3_64" download target="_blank"> Audio MP3 - 64kb </a>
+                            <a :href="videoLink_mp3_128" download target="_blank"> Audio MP3 - 128kb </a>
+                            <a :href="videoLink_aac" download target="_blank"> Audio AAC</a>
+                            <a :href="videoLink_1080" download target="_blank"> Video 1080p </a>
+                            <a :href="videoLink_720" download target="_blank"> Video 720p </a>
+                            <a :href="videoLink_480" download target="_blank"> Video 480p </a>
+                            <a :href="videoLink_240" download target="_blank"> Video 240p </a>
+                        </div>
+                    </div>
+
+
+
                 </div>
             </div>
             <div v-else-if="successCheck === false" class="error">
@@ -98,10 +125,11 @@ export default {
             successCheck: null,
             videoTitle: '',
             channelTitle: '',
+            // Converted Formats
             videoLinkFormatMedium: undefined,
-            videoLinkFormathd720: undefined,
+            videoLinkFormat_720: undefined,
             videoLinkMedium: undefined,
-            videoLinkhd720: undefined,
+            videoLink_720: undefined,
             thumbnail320: undefined,
             thumbnailURL: undefined,
 
@@ -143,9 +171,9 @@ export default {
                     this.videoTitle = fetchResponse.title
                     this.channelTitle = fetchResponse.channelTitle
                     this.videoLinkFormatMedium = fetchResponse.formats.find(item => item.quality === 'medium')
-                    this.videoLinkFormathd720 = fetchResponse.formats.find(item => item.quality === 'hd720')
+                    this.videoLinkFormat_720 = fetchResponse.formats.find(item => item.quality === 'hd720')
                     this.videoLinkMedium = this.videoLinkFormatMedium.url
-                    this.videoLinkhd720 = this.videoLinkFormathd720.url
+                    this.videoLink_720 = this.videoLinkFormat_720.url
                     this.thumbnail320 = fetchResponse.thumbnail.find(item => item.width === 320)
                     this.thumbnailURL = this.thumbnail320.url
 
@@ -178,7 +206,7 @@ export default {
 
 @media (max-width: 800px) {
     .main {
-        height: 100vh;
+        height: 100%;
         width: 85vw;
 
         align-items: center;
@@ -203,20 +231,20 @@ export default {
 }
 
 footer {
+
     padding: 1em;
     background: rgb(208, 234, 255);
     display: flex;
     flex-flow: column;
     height: 100%;
-    width: 50%;
-    justify-content: space-around;
+    width: 50vw;
     align-items: center;
     margin: 0 auto;
 }
 
 @media (max-width: 800px) {
     footer {
-        height: 100%;
+
         width: 85vw;
         justify-content: space-around;
         align-items: center;
@@ -238,8 +266,7 @@ footer {
 }
 
 ::placeholder {
-    font-size: 1.2em;
-    padding-left: 20px;
+    font-size: 1em;
 }
 
 @media (max-width: 800px) {
@@ -260,6 +287,8 @@ footer {
     outline: none;
     border-radius: 5px;
     width: 50vw;
+    padding: 0.6em;
+    font-size: 0.7em;
 }
 
 @media (max-width: 800px) {
@@ -302,10 +331,9 @@ footer {
 }
 
 .coffee button {
-    background-color: #cd1a1a;
-    color: white;
-    border: 1px solid #cd1a1a;
-    padding: 12px;
+    background-color: rgba(255, 221, 0);
+    color: rgb(86, 78, 31);
+    border: 1px solid rgb(86, 78, 31);
     border-radius: 5px;
     font-size: 1em;
     padding: .5em;
@@ -316,5 +344,133 @@ footer {
     padding: 10px;
 
 
+}
+
+.results {
+    width: 50vw;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    background: rgb(255, 227, 227);
+    word-wrap: break-word;
+}
+
+@media (max-width: 800px) {
+    .results {
+        width: 85vw;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.video-display {
+    width: 50vw;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+
+}
+
+@media (max-width: 800px) {
+    .video-display {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.thumbnail {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.thumbnail img {
+    border-radius: 3%;
+}
+
+.video {
+    padding: 20px;
+}
+
+.videotitle {
+    font-weight: bold;
+    margin-left: 40px;
+    font-size: 1.5em;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.videolength {
+    font-weight: bold;
+    margin-left: 40px;
+    font-size: 1.1em;
+}
+
+@media (max-width: 800px) {
+
+    .video,
+    .videotitle,
+    .videolength {
+        margin-left: 0px;
+    }
+}
+
+
+/* Dropdown Stuff */
+
+.format-btn {
+    margin-top: 10px;
+    margin-left: 40px;
+    background-color: #cd1a1a;
+    color: white;
+    border: 1px solid #cd1a1a;
+    padding: .5em;
+    font-size: 16px;
+
+    border-radius: 5px;
+}
+
+.formats-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover,
+.dropdown-content a:active {
+    background-color: #ddd;
+}
+
+.formats-dropdown:hover,
+.formats-dropdown:active .dropdown-content {
+    display: block;
+}
+
+.formats-dropdown:hover,
+.formats-dropdown:active .format-btn {
+
+    background-color: rgba(255, 221, 0);
+    border: 1px solid rgb(86, 78, 31);
+    color: rgb(86, 78, 31);
 }
 </style>
