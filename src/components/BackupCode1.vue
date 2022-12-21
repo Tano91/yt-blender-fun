@@ -13,13 +13,14 @@
             <!-- Handle Submit for Video Formats -->
             <form @submit.prevent="handleSubmit" class="input-container">
                 <input v-model="videoURL" type="text" name="VideoURL" placeholder="Paste URL for a Video"
-                    class="custom-input-field">
-                <button class="searchbtn">Search</button>
+                    class="custom-field">
+                <button class="searchbtn">Get Video</button>
+                <button @click="handleMP3" class="searchbtn_mp3">Get mp3</button>
             </form>
 
         </div>
         <!-- Results for Video Div -->
-        <div class="results">
+        <div class="results-video">
             <!-- Spinner -->
             <div v-if="spinnerLoad === true">
                 <Spinner />
@@ -53,48 +54,62 @@
             </div>
         </div>
 
+        <div class="results-mp3">
+            <!-- Spinner -->
+            <div v-if="spinnerLoad === true">
+                <Spinner />
+            </div>
+            <!-- Success Check -->
+            <div v-if="successCheck_mp3 === true" class="video-display">
+                <div class="thumbnail">
+                    <img :src="thumbnail_URL" alt="">
+                </div>
+                <div class="video">
+                    <div class="videotitle">{{ videoTitle }}</div>
+                    <div class="videolength"> <b>Duration:</b> {{ videoLength }} Minutes </div>
+
+                    <!-- Format Button -->
+
+                    <button v-if="videoFormat_mp3_Link !== undefined"><a :href="videoFormat_mp3_Link" download
+                            target="_blank"> Download MP3 </a></button>
+
+
+                </div>
+            </div>
+            <!-- Failure Check -->
+            <div v-else-if="successCheck_mp3 === false" class="error">
+                <p> {{ failureMessage }}</p>
+            </div>
+        </div>
+
         <!-- Terms -->
         <div class="terms-text">By using our service you are accepting our <a href="/">Terms of Service.</a>
         </div>
         <div class="coffee">
             <button>Buy Me a Coffee</button>
         </div>
-        <div class="description-container">
-            <h2 class="description-header">What is YTBlender?</h2>
-            <p class="description">YTBlender is a quick, easy and simple Youtube Downloader Tool that converts videos to
-                mp4 format and allows downloads without the need for registration. No need to install software on your
-                computer, tablet or mobile device, just copy and paste the Youtube link and watch the magic happen, all
-                for free!
+        <div class="description">
+            <h2>What is YTBlender?</h2>
+            <p>It is a long established fact that a reader will be distracted by the readable content of a
+                page
+                when
+                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal
+                distribution
+                of letters, as opposed to using 'Content here, content here', making it look like readable
+                English. Many
+                desktop publishing packages and web page editors now use Lorem Ipsum as their default model
+                text, and a
+                search for 'lorem ipsum' will uncover many web sites still in their infancy. Various
+                versions
+                have
+                evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the
+                like).
             </p>
-        </div>
+            <h2>Features:</h2>
+            <p>1) No Ads</p>
+            <p>2) Lots of Different Formats</p>
+            <p>3) Quick, Easy & Safe</p>
 
-        <div class="description-icons-container-first">
-            <div class="description-icon">
-                <span>!</span>
-                No Ads
-            </div>
-            <div class="description-icon">
-                <span>!</span>
-                Many Formats
-            </div>
-            <div class="description-icon">
-                <span>!</span>
-                Quick, Easy, Safe
-            </div>
-        </div>
-        <div class="description-icons-container-second">
-            <div class="description-icon">
-                <span>!</span>
-                Paste Link
-            </div>
-            <div class="description-icon">
-                <span>!</span>
-                Click Search
-            </div>
-            <div class="description-icon">
-                <span>!</span>
-                Download!
-            </div>
         </div>
     </div>
 
@@ -135,6 +150,7 @@ export default {
             // Success / Failure Check Varaibles
             failureMessage: '',
             successCheck: null,
+            successCheck_mp3: null,
             //Video Info
             videoTitle: '',
             videoLength: '',
@@ -146,6 +162,9 @@ export default {
             videoFormat_720_Link: undefined,
             videoFormat_480_Link: undefined,
             videoFormat_360_Link: undefined,
+            videoFormat_mp3_Link: undefined,
+
+            mp3_btn_clicked: false
         }
     },
     methods: {
@@ -176,7 +195,13 @@ export default {
             console.log(this.videoFormat_1080_Link)
         },
 
+        handleMP3() {
+            this.mp3_btn_clicked = true;
+        },
         async handleSubmit() {
+            if (this.mp3_btn_clicked === true) {
+                console.log('button clicked!')
+            }
             this.spinnerLoad = true
             if (this.videoURL === undefined || this.videoURL === "" || this.videoURL === null) {
                 this.successCheck = false
@@ -235,200 +260,5 @@ export default {
 </script>
 
 <style scoped>
-.main {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-    width: 75vw;
-    align-items: center;
-    margin: 0 auto;
-    /* font-family: 'Montserrat', sans-serif; */
-    font-family: 'Open Sans', sans-serif;
-}
 
-.heading {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.heading h1 {
-    margin-bottom: 0;
-}
-
-.tagline {
-    margin-top: 5px;
-    margin-bottom: 35px;
-}
-
-
-.input-container {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: center;
-    width: 75vw;
-
-}
-
-@media (max-width: 800px) {
-    .input-container {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-    }
-
-}
-
-.custom-input-field {
-    border: none;
-    outline: none;
-    width: 60%;
-    border-radius: 5px;
-    padding: 0.6em;
-    font-size: 1.3em;
-    height: 45px;
-    box-sizing: border-box;
-}
-
-.custom-input-field::placeholder {
-    color: #dfdfdf
-}
-
-.custom-input-field:hover {
-    box-sizing: border-box;
-    border: 1px solid #cd1a1a;
-}
-
-@media (max-width: 800px) {
-    .custom-input-field {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-}
-
-.searchbtn {
-    background-color: #cd1a1a;
-    color: white;
-    border: none;
-    padding: 12px;
-    margin-left: 10px;
-    border-radius: 5px;
-    font-size: 1em;
-    border: 1px solid #cd1a1a;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.searchbtn:hover {
-    background: white;
-    color: #cd1a1a;
-}
-
-@media (max-width: 800px) {
-    .searchbtn {
-        margin-left: 0;
-        width: 50%;
-
-    }
-}
-
-
-.terms-text {
-    text-align: center;
-    margin: 20px;
-}
-
-.coffee {
-    margin-top: px;
-    margin-bottom: 50px;
-}
-
-.coffee button {
-    background: #FFDD00;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    padding: 12px;
-    font-size: 1em;
-    border: 1px solid #FFDD00;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-}
-
-.coffee button:hover {
-    background: white;
-    color: #FFDD00;
-
-}
-
-.description-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /* background: green; */
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
-}
-
-.description-header {
-    margin-top: 30px;
-}
-
-.description {
-    text-align: justify;
-    margin-bottom: 30px;
-}
-
-.description-icons-container-first {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    margin-top: 15px;
-    /* background: red; */
-    border-bottom: 1px solid #dfdfdf;
-}
-
-
-.description-icons-container-second {
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    margin-top: 15px;
-    /* background: red; */
-    border-bottom: 1px solid #dfdfdf;
-}
-
-@media(max-width:800px) {
-
-    .description-icons-container-first,
-    .description-icons-container-second {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-}
-
-.description-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    font-weight: bold;
-    width: 30%;
-    height: 30vh;
-    /* background-color: pink; */
-
-}
-
-@media (max-width: 800px) {
-    .description-icons-container {
-        flex-direction: column;
-    }
-}
 </style>
