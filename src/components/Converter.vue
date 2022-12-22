@@ -37,15 +37,24 @@
                     <div class="videolength"> {{ videoLength }}</div>
 
                     <!-- Format Buttons -->
+
                     <div class="format-button-container">
                         <button class="format-button" v-if="videoFormat_1080_Link !== undefined"><a
-                                :href="videoFormat_1080_Link" download target="_blank"> Video 1080p </a></button>
+                                :href="videoFormat_1080_Link" download="newfilename" type="video/mp4" target="_blank">
+                                Video 1080p
+                            </a></button>
                         <button class="format-button" v-if="videoFormat_720_Link !== undefined"><a
-                                :href="videoFormat_720_Link" download target="_blank"> Video 720p </a></button>
+                                :href="videoFormat_720_Link" download="newfilename" type="video/mp4" target="_blank">
+                                Video 720p
+                            </a></button>
                         <button class="format-button" v-if="videoFormat_480_Link !== undefined"><a
-                                :href="videoFormat_480_Link" download target="_blank"> Video 480p </a></button>
+                                :href="videoFormat_480_Link" download="newfilename" type="video/mp4" target="_blank">
+                                Video 480p
+                            </a></button>
                         <button class="format-button" v-if="videoFormat_360_Link !== undefined"><a
-                                :href="videoFormat_360_Link" download target="_blank"> Video 360p </a></button>
+                                :href="videoFormat_360_Link" download="newfilename" type="video/mp4" target="_blank">
+                                Video 360p
+                            </a></button>
                     </div>
 
 
@@ -147,27 +156,15 @@ export default {
             return Math.floor(value / 60) + ":" + (value % 60 ? value % 60 : "00");
         },
         handleFormats(res) {
-            for (let item of res.adaptiveFormats) {
-                if (item.quality === "hd1080" && item.mimeType.includes("video/mp4")) {
-                    this.videoFormat_1080_Link = item.url;
-                } else if (
-                    item.quality === "hd720" &&
-                    item.mimeType.includes("video/mp4")
-                ) {
-                    this.videoFormat_720_Link = item.url;
-                } else if (
-                    item.quality === "large" &&
-                    item.mimeType.includes("video/mp4")
-                ) {
-                    this.videoFormat_480_Link = item.url;
-                } else if (
-                    item.quality === "medium" &&
-                    item.mimeType.includes("video/mp4")
-                ) {
-                    this.videoFormat_360_Link = item.url;
+
+            for (let arr of Object.entries(res.link)) {
+                if (arr[1][2] === "hd720") {
+                    this.videoFormat_720_Link = arr[1][0];
+                }
+                else if (arr[1][2] === "medium") {
+                    this.videoFormat_360_Link = arr[1][0];
                 }
             }
-            console.log(this.videoFormat_1080_Link)
         },
 
         async handleSubmit() {
@@ -181,7 +178,7 @@ export default {
                 const regex = /(https\:\/\/www\.youtube\.com\/watch\?v=)/
                 this.videoID = this.videoURL.split(regex)[2];
 
-                // FETCH YT-API
+                // FETCH YT-API : Youtube Video Download Info - By: ytjar
 
                 const options = {
                     method: 'GET',
@@ -191,21 +188,21 @@ export default {
                     }
                 };
 
-                const fetchAPI = await fetch(`https://yt-api.p.rapidapi.com/dl?id=${this.videoID}`, options)
+                const fetchAPI = await fetch(`https://youtube-video-download-info.p.rapidapi.com/dl?id=${this.videoID}`, options)
 
                 const fetchResponse = await fetchAPI.json()
                 console.log(fetchResponse)
 
-                if (fetchResponse.status === "OK") {
+                if (fetchResponse.status === "ok") {
                     //Set SuccessCheck & Assign Title & Length values
 
                     this.successCheck = true
                     this.videoTitle = fetchResponse.title
-                    this.videoLength = this.convert(fetchResponse.lengthSeconds)
+                    this.videoLength = fetchResponse.length
 
                     //Find & Assign Thumbnail
-                    this.thumbnail_320 = fetchResponse.thumbnail.find(item => item.width === 320)
-                    this.thumbnail_URL = this.thumbnail_320.url
+                    // this.thumbnail_320 = fetchResponse.thumbnail.find(item => item.width === 320)
+                    this.thumbnail_URL = fetchResponse.thumb
 
                     //Assign Formats to Variables
                     this.handleFormats(fetchResponse)
