@@ -14,7 +14,10 @@
             <form @submit.prevent="handleSubmit" class="input-container">
                 <input v-model="videoURL" type="text" name="VideoURL" placeholder="Paste URL for a Video"
                     class="custom-input-field">
-                <button class="searchbtn">Search</button>
+                <button class="searchbtn">
+                    Search
+                    <img id="arrow-icon" src="/arrow_icon.svg" alt="">
+                </button>
             </form>
 
         </div>
@@ -30,19 +33,21 @@
                     <img :src="thumbnail_URL" alt="">
                 </div>
                 <div class="video">
-                    <div class="videotitle">{{ videoTitle }}</div>
-                    <div class="videolength"> <b>Duration:</b> {{ videoLength }} Minutes </div>
+                    <div class="videotitle"> <b>{{ videoTitle }}</b> </div>
+                    <div class="videolength"> <b>Duration:</b> {{ videoLength }}</div>
 
                     <!-- Format Buttons -->
+                    <div class="format-button-container">
+                        <button class="format-button" v-if="videoFormat_1080_Link !== undefined"><a
+                                :href="videoFormat_1080_Link" download target="_blank"> Video 1080p </a></button>
+                        <button class="format-button" v-if="videoFormat_720_Link !== undefined"><a
+                                :href="videoFormat_720_Link" download target="_blank"> Video 720p </a></button>
+                        <button class="format-button" v-if="videoFormat_480_Link !== undefined"><a
+                                :href="videoFormat_480_Link" download target="_blank"> Video 480p </a></button>
+                        <button class="format-button" v-if="videoFormat_360_Link !== undefined"><a
+                                :href="videoFormat_360_Link" download target="_blank"> Video 360p </a></button>
+                    </div>
 
-                    <button v-if="videoFormat_1080_Link !== undefined"><a :href="videoFormat_1080_Link" download
-                            target="_blank"> Video 1080p </a></button>
-                    <button v-if="videoFormat_720_Link !== undefined"><a :href="videoFormat_720_Link" download
-                            target="_blank"> Video 720p </a></button>
-                    <button v-if="videoFormat_480_Link !== undefined"><a :href="videoFormat_480_Link" download
-                            target="_blank"> Video 480p </a></button>
-                    <button v-if="videoFormat_360_Link !== undefined"><a :href="videoFormat_360_Link" download
-                            target="_blank"> Video 360p </a></button>
 
 
                 </div>
@@ -57,7 +62,9 @@
         <div class="terms-text">By using our service you are accepting our <a href="/">Terms of Service.</a>
         </div>
         <div class="coffee">
-            <button>Buy Me a Coffee</button>
+            <button>
+                <img class="coffee-logo" src="/bmc-logo.svg" alt="">
+                Buy Me a Coffee</button>
         </div>
         <div class="description-container">
             <h2 class="description-header">What is YTBlender?</h2>
@@ -70,45 +77,48 @@
 
         <div class="description-icons-container-first">
             <div class="description-icon">
-                <span>!</span>
+                <img class="description-icon-image" src="/no_ads_icon.svg" alt="">
                 No Ads
             </div>
             <div class="description-icon">
-                <span>!</span>
-                Many Formats
+                <img class="description-icon-image" src="/format_icon.svg" alt="">
+                .mp4 Format
             </div>
             <div class="description-icon">
-                <span>!</span>
-                Quick, Easy, Safe
+                <img class="description-icon-image" src="/secure_icon.svg" alt="">
+                Easy & Safe
             </div>
         </div>
         <div class="description-icons-container-second">
             <div class="description-icon">
-                <span>!</span>
+                <img class="description-icon-image" src="/paste_icon.svg" alt="">
                 Paste Link
             </div>
             <div class="description-icon">
-                <span>!</span>
+                <img class="description-icon-image" src="/search_icon.svg" alt="">
                 Click Search
             </div>
             <div class="description-icon">
-                <span>!</span>
+                <img class="description-icon-image" src="/download-icon.svg" alt="">
                 Download!
             </div>
         </div>
     </div>
 
 
-    <footer>
+    <!--     <footer>
         <div class="inside-footer">
+
             <div class="footer-links">
                 <a href="/">Contact Us</a>
                 <a href="/">Privacy Policy</a>
                 <a href="/">Terms of Use</a>
             </div>
-            <div class="copyright">© 2022 YTBlender. All Rights Reserved.</div>
+
+            <div class="copyright">© 2022 Santano McCalla. All Rights Reserved.</div>
+
         </div>
-    </footer>
+    </footer> -->
 
 
 
@@ -255,11 +265,14 @@ export default {
 
 .heading h1 {
     margin-bottom: 0;
+    color: #cd1a1a;
+    font-size: 2.5em;
 }
 
 .tagline {
     margin-top: 5px;
     margin-bottom: 35px;
+    color: #454545;
 }
 
 
@@ -282,13 +295,13 @@ export default {
 }
 
 .custom-input-field {
-    border: none;
+    border: 1px solid #dfdfdf;
     outline: none;
     width: 60%;
     border-radius: 5px;
     padding: 0.6em;
     font-size: 1.3em;
-    height: 45px;
+    height: 56px;
     box-sizing: border-box;
 }
 
@@ -309,13 +322,16 @@ export default {
 }
 
 .searchbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #cd1a1a;
     color: white;
     border: none;
     padding: 12px;
     margin-left: 10px;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 1.5em;
     border: 1px solid #cd1a1a;
     cursor: pointer;
     font-weight: bold;
@@ -334,18 +350,34 @@ export default {
     }
 }
 
+#arrow-icon {
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+}
 
 .terms-text {
     text-align: center;
     margin: 20px;
+    color: #454545;
+}
+
+.terms-text a {
+    color: #454545;
 }
 
 .coffee {
+
     margin-top: px;
     margin-bottom: 50px;
 }
 
 .coffee button {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+
     background: #FFDD00;
     color: black;
     border: none;
@@ -360,27 +392,150 @@ export default {
 
 .coffee button:hover {
     background: white;
-    color: #FFDD00;
-
+    color: black
 }
+
+.coffee-logo {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+
+/* Results Display Section */
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 60vw;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #dfdfdf;
+}
+
+
+.video-display {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    justify-content: space-between;
+}
+
+@media(max-width:800px) {
+    .video-display {
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.thumbnail img {
+    border-radius: 10px;
+}
+
+@media(max-width:800px) {
+    .thumbnail img {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media(max-width:800px) {
+    .thumbnail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.videotitle {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.videolength {
+    text-align: center;
+}
+
+.format-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+@media(max-width:800px) {
+    .format-button-container {
+        flex-direction: column;
+
+    }
+}
+
+.format-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #cd1a1a;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #cd1a1a;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 8px;
+    font-size: 1em;
+}
+
+.format-button:hover,
+.format-button a:hover {
+    background: white;
+    color: #cd1a1a;
+}
+
+.format-button a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+/* Description Styles */
+
 
 .description-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* background: green; */
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf;
+    border: 1px solid #dfdfdf;
+
+    background: white;
+    padding: 15px 40px;
+
 }
 
 .description-header {
     margin-top: 30px;
+    color: #454545;
 }
 
 .description {
     text-align: justify;
     margin-bottom: 30px;
+    color: #454545;
+    line-height: 30px;
 }
 
 .description-icons-container-first {
@@ -390,6 +545,7 @@ export default {
     margin-top: 15px;
     /* background: red; */
     border-bottom: 1px solid #dfdfdf;
+    color: #454545;
 }
 
 
@@ -399,7 +555,8 @@ export default {
     justify-content: space-evenly;
     margin-top: 15px;
     /* background: red; */
-    border-bottom: 1px solid #dfdfdf;
+    /* border-bottom: 1px solid #dfdfdf; */
+    color: #454545;
 }
 
 @media(max-width:800px) {
@@ -421,9 +578,14 @@ export default {
     font-size: 30px;
     font-weight: bold;
     width: 30%;
-    height: 30vh;
+    height: 20vh;
     /* background-color: pink; */
+}
 
+.description-icon-image {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 10px;
 }
 
 @media (max-width: 800px) {

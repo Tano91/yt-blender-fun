@@ -1,14 +1,16 @@
 <template>
   <Navbar />
   <router-view />
+  <Footer />
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import Footer from './components/Footer.vue';
 import Homeview from '@/views/HomeView.vue'
 export default {
   name: "App",
-  components: { Homeview, Navbar }
+  components: { Homeview, Navbar, Footer }
 }
 </script>
  
@@ -20,6 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+
 
 }
 </style>

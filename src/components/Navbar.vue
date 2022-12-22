@@ -2,7 +2,9 @@
     <header>
         <div class="header-container">
             <router-link :to="{ name: 'home' }">
-                <h1>YTBlender</h1>
+                <h1 id="logo_icon_container">
+                    <img class="logo_icon" src="/ytb_logo_icon.svg" alt="">
+                </h1>
             </router-link>
         </div>
         <nav>
@@ -70,5 +72,10 @@ header a.router-link-active {
     color: #cd1a1a;
     font-weight: bold;
 
+}
+
+.logo_icon {
+    height: 50px;
+    widows: 50px;
 }
 </style>
