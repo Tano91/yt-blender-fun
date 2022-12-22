@@ -34,7 +34,7 @@
                 </div>
                 <div class="video">
                     <div class="videotitle"> <b>{{ videoTitle }}</b> </div>
-                    <div class="videolength"> <b>Duration:</b> {{ videoLength }}</div>
+                    <div class="videolength"> {{ videoLength }}</div>
 
                     <!-- Format Buttons -->
                     <div class="format-button-container">
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Terms -->
-        <div class="terms-text">By using our service you are accepting our <a href="/">Terms of Service.</a>
+        <div class="terms-text">By using our service you are accepting our <a href="/terms">Terms of Service.</a>
         </div>
         <div class="coffee">
             <button>
@@ -104,22 +104,6 @@
             </div>
         </div>
     </div>
-
-
-    <!--     <footer>
-        <div class="inside-footer">
-
-            <div class="footer-links">
-                <a href="/">Contact Us</a>
-                <a href="/">Privacy Policy</a>
-                <a href="/">Terms of Use</a>
-            </div>
-
-            <div class="copyright">© 2022 Santano McCalla. All Rights Reserved.</div>
-
-        </div>
-    </footer> -->
-
 
 
 </template>
@@ -357,6 +341,7 @@ export default {
 }
 
 .terms-text {
+
     text-align: center;
     margin: 20px;
     color: #454545;
@@ -410,7 +395,7 @@ export default {
     align-items: center;
     margin-top: 30px;
     margin-bottom: 30px;
-    width: 60vw;
+    width: 75vw;
     padding-bottom: 30px;
     border-bottom: 1px solid #dfdfdf;
 }
@@ -529,6 +514,7 @@ export default {
 .description-header {
     margin-top: 30px;
     color: #454545;
+    text-align: center;
 }
 
 .description {
@@ -580,6 +566,12 @@ export default {
     width: 30%;
     height: 20vh;
     /* background-color: pink; */
+}
+
+@media(max-width:800px) {
+    .description-icon {
+        font-size: 15px;
+    }
 }
 
 .description-icon-image {

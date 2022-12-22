@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <h2><strong>Terms and Conditions</strong></h2>
+        <h2><strong>Terms & Conditions</strong></h2>
 
         <p>Welcome to YT Blender!</p>
 

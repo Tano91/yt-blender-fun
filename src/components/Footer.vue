@@ -5,7 +5,7 @@
             <div class="footer-links">
                 <a href="mailto:ytblender@gmail.com">Contact Us</a>
                 <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Use</a>
+                <a href="/terms">Terms of Service</a>
             </div>
 
             <div class="copyright">© 2022 Santano McCalla. All Rights Reserved.</div>
@@ -58,7 +58,8 @@ footer {
 
 .footer-links a {
     text-decoration: none;
-    color: #454545
+    color: #454545;
+    text-align: center;
 }
 
 .footer-links a:hover {

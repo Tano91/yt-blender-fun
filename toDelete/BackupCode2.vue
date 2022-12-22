@@ -87,7 +87,7 @@
         </div>
 
         <!-- Terms -->
-        <div class="terms-text">By using our service you are accepting our <a href="/">Terms of Service.</a>
+        <div class="terms-text">By using our service you are accepting our <a href="/terms">Terms of Service.</a>
         </div>
         <div class="coffee">
             <button>Buy Me a Coffee</button>
