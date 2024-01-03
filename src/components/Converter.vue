@@ -73,7 +73,7 @@
         <div class="coffee">
             <button>
                 <img class="coffee-logo" src="/bmc-logo.svg" alt="">
-                <a class="searchbtn href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a></button>
+                <a href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a></button>
         </div>
         <div class="description-container">
             <h2 class="description-header">What is YTBlender?</h2>
@@ -370,6 +370,19 @@ export default {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
+}
+
+.coffee a:link { 
+  text-decoration: none; 
+} 
+.coffee a:visited { 
+  text-decoration: none; 
+} 
+.coffee a:hover { 
+  text-decoration: none; 
+} 
+.coffee a:active { 
+  text-decoration: none; 
 }
 
 .coffee button:hover {
