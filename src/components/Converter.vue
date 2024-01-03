@@ -71,9 +71,10 @@
         <div class="terms-text">By using our service you are accepting our <a href="/terms">Terms of Service.</a>
         </div>
         <div class="coffee">
-            <button>
-                <img class="coffee-logo" src="/bmc-logo.svg" alt="">
-                <a href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a></button>
+         <button>
+           <img class="coffee-logo" src="/bmc-logo.svg" alt="">
+           <a class="no-decoration" href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a>
+         </button>
         </div>
         <div class="description-container">
             <h2 class="description-header">What is YTBlender?</h2>
@@ -372,17 +373,8 @@ export default {
     font-weight: bold;
 }
 
-.coffee a:link { 
-  text-decoration: none; 
-} 
-.coffee a:visited { 
-  text-decoration: none; 
-} 
-.coffee a:hover { 
-  text-decoration: none; 
-} 
-.coffee a:active { 
-  text-decoration: none; 
+.no-decoration {
+ text-decoration: none;
 }
 
 .coffee button:hover {
