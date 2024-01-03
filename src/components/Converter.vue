@@ -73,7 +73,7 @@
         <div class="coffee">
             <button>
                 <img class="coffee-logo" src="/bmc-logo.svg" alt="">
-                <a href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a></button>
+                <a class="searchbtn href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a></button>
         </div>
         <div class="description-container">
             <h2 class="description-header">What is YTBlender?</h2>
