@@ -1,6 +1,4 @@
 <template>
-    <!-- https://www.youtube.com/watch?v=UxxajLWwzqY -->
-
     <!-- New Interface -->
     <div class="main">
         <div class="search">
@@ -71,10 +69,10 @@
         <div class="terms-text">By using our service you are accepting our <a href="/terms">Terms of Service.</a>
         </div>
         <div class="coffee">
-         <button>
-           <img class="coffee-logo" src="/bmc-logo.svg" alt="">
-           <a class="no-decoration" href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a>
-         </button>
+            <button>
+                <img class="coffee-logo" src="/bmc-logo.svg" alt="">
+                <a class="no-decoration" target="_blank" href="https://www.buymeacoffee.com/tano">Buy Me a Coffee</a>
+            </button>
         </div>
         <div class="description-container">
             <h2 class="description-header">What is YTBlender?</h2>
@@ -114,8 +112,6 @@
             </div>
         </div>
     </div>
-
-
 </template>
 
 <script>
@@ -373,11 +369,6 @@ export default {
     font-weight: bold;
 }
 
-.no-decoration {
- text-decoration: none;
-    color: #454545;
-}
-
 .coffee button:hover {
     background: white;
     color: black
@@ -387,6 +378,11 @@ export default {
     width: 35px;
     height: 35px;
     margin-right: 10px;
+}
+
+.no-decoration {
+    text-decoration: none;
+    color: #454545;
 }
 
 
