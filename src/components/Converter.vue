@@ -375,6 +375,7 @@ export default {
 
 .no-decoration {
  text-decoration: none;
+    color: #454545;
 }
 
 .coffee button:hover {
